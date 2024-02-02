@@ -24,6 +24,6 @@ Extract = SparkSubmitOperator(
 		task_id='spark_submit_task', 
         files='data.txt',
 		dag=spark_dag,
-        application_args='data.txt'
+        application_args=['data.txt']
 		)
 
