@@ -38,7 +38,7 @@ from airflow.operators.bash import BashOperator
 
 # [START instantiate_dag]
 with DAG(
-    "tutorial",
+    "spark_example",
     # [START default_args]
     # These args will get passed on to each operator
     # You can override them on a per-task basis during operator initialization
