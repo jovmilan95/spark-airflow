@@ -26,3 +26,6 @@ kubectl apply -f ./2-setup-basic-airflow-cluster/git-credentials-secret.yaml -n 
         --timeout=20m \
         --create-namespace --namespace basic-airflow
 ```
+
+
+spark-submit --master spark://basic-spark-master-0.basic-spark-headless.basic-spark.svc.cluster.local:7077 --py-files dags/repo/dags/pi.py --name arrow-spark --deploy-mode cluster examples/src/main/python/pi.py 10

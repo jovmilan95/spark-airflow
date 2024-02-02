@@ -23,7 +23,9 @@ Extract = SparkSubmitOperator(
 		conn_id= 'spark_local', 
 		task_id='spark_submit_task', 
 		dag=spark_dag,
-        py_files="dags/repo/dags/pi.py",
+        env_vars={
+            "SPARK_MASTER_URL": "spark://basic-spark-master-0.basic-spark-headless.basic-spark.svc.cluster.local:7077"
+        },
         application_args=['10']
 		)
 
