@@ -15,7 +15,7 @@ kubectl apply -f ./2-setup-basic-airflow-cluster/git-credentials-secret.yaml -n 
         --set ingress.web.host=airflow.local \
         --set ingress.web.ingressClassName=nginx \
         --set images.airflow.repository=apache/airflow \
-        --set images.airflow.tag=spark1 \
+        --set images.airflow.tag=spark \
         --set executor=KubernetesExecutor \
         --set dags.gitSync.enabled=true \
         --set dags.gitSync.repo='https://github.com/jovmilan95/spark-airflow.git' \
