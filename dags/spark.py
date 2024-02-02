@@ -19,11 +19,11 @@ spark_dag = DAG(
 )
 
 Extract = SparkSubmitOperator(
-		application = "wordcount.py",
+		application = "/opt/airflow/dags/repo/dags/wordcount.py",
 		conn_id= 'spark_local', 
 		task_id='spark_submit_task', 
         files='data.txt',
 		dag=spark_dag,
-        application_args=['dags/repo/dags/data.txt']
+        application_args=['/opt/airflow/dags/repo/dags/data.txt']
 		)
 
