@@ -1,0 +1,6 @@
+lxml
+python-decouple
+apache-airflow-providers-apache-spark
+requests
+pandas
+pydantic==1.10.10
