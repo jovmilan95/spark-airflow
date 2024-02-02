@@ -9,11 +9,12 @@ RUN apt update && \
 
 # Set JAVA_HOME
 ENV JAVA_HOME /usr/lib/jvm/java-11-openjdk-amd64/
+ENV SPARK_MODE worker
 RUN export JAVA_HOME
 
 USER airflow
 
-COPY ./requirements.txt /
+COPY ./requirements-airflow.txt .
 RUN pip install -r requirements-airflow.txt
 
 COPY --chown=airflow:root ./dags /opt/airflow/dags

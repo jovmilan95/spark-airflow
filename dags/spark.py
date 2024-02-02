@@ -23,6 +23,7 @@ Extract = SparkSubmitOperator(
 		conn_id= 'spark_local', 
 		task_id='spark_submit_task', 
 		dag=spark_dag,
+        py_files="dags/repo/dags/pi.py",
         application_args=['10']
 		)
 
