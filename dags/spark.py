@@ -19,11 +19,10 @@ spark_dag = DAG(
 )
 
 Extract = SparkSubmitOperator(
-		application = "dags/repo/dags/wordcount.py",
+		application = "dags/repo/dags/pi.py",
 		conn_id= 'spark_local', 
 		task_id='spark_submit_task', 
-        files='dags/repo/dags/data.txt',
 		dag=spark_dag,
-        application_args=['dags/repo/dags/data.txt']
+        application_args=['10']
 		)
 
