@@ -7,9 +7,7 @@ https://artifacthub.io/packages/helm/bitnami/spark
 ```
     helm repo add bitnami https://charts.bitnami.com/bitnami
     helm repo update bitnami
-    export HOSTNAME=spark.local
     helm upgrade --install basic-spark bitnami/spark \
-        --version 8.5.0 \
         --set ingress.enabled=true \
         --set ingress.hostname=spark.local \
         --set ingress.ingressClassName=nginx \

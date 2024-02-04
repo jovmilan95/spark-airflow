@@ -1,0 +1,10 @@
+FROM bitnami/spark:3.5.0-debian-11-r21
+USER root
+
+# Visit for more https://github.com/bitnami/containers/pull/52661
+COPY ./spark-env.sh /opt/bitnami/scripts/spark-env.sh
+COPY ./entrypoint.sh /opt/bitnami/scripts/spark/entrypoint.sh
+
+RUN chmod +x /opt/bitnami/scripts/spark-env.sh
+RUN chmod +x /opt/bitnami/scripts/spark/entrypoint.sh
+USER 1001

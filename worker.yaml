@@ -1,0 +1,45 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  labels:
+    app: worker
+  name: worker
+  namespace: basic-spark
+  ownerReferences:
+spec:
+  serviceAccountName: spark
+  automountServiceAccountToken: false
+  containers:
+  # - command:
+  #   - sleep
+  #   - "5000"
+  # - env:
+  #   - name: SPARK_MODE
+  #     value: worker
+  #   - name: BITNAMI_DEBUG
+  #     value: "false"
+  #   - name: SPARK_DAEMON_MEMORY
+  #   - name: SPARK_WORKER_WEBUI_PORT
+  #     value: "8080"
+  #   - name: SPARK_DAEMON_JAVA_OPTS
+  #   - name: SPARK_MASTER_URL
+  #     value: spark://basic-spark-master-svc:7077
+  #   - name: SPARK_WORKER_OPTS
+  #     value: -Dspark.ui.reverseProxy=true
+  - image: docker.io/bitnami/spark:3.5.0-debian-11-r21
+    imagePullPolicy: IfNotPresent
+    name: spark-worker
+    securityContext:
+      allowPrivilegeEscalation: false
+      capabilities:
+        drop:
+        - ALL
+      privileged: false
+      readOnlyRootFilesystem: false
+      runAsNonRoot: true
+      runAsUser: 1001
+  securityContext:
+    fsGroup: 1001
+    fsGroupChangePolicy: Always
+  serviceAccount: basic-spark
+  serviceAccountName: basic-spark

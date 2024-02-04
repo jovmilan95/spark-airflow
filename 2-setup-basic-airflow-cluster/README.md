@@ -26,6 +26,36 @@ kubectl apply -f ./2-setup-basic-airflow-cluster/git-credentials-secret.yaml -n 
         --timeout=20m \
         --create-namespace --namespace basic-airflow
 ```
+### Build spark container 
+```
+    docker build -t milan/spark:test -f Dockerfile.Spark .
+```
+### Create spark service account with cluster-admin privlages
+### Create worker.yaml
+### Copy config content to /opt/bitnami/spark/config
+### And run command
+```
+KUBECONFIG=/opt/bitnami/spark/config spark-submit \
+    --conf spark.kubernetes.container.image=milan/spark:test \
+    --master k8s://https://kubernetes.default.svc:443 \
+    --conf spark.kubernetes.driverEnv.SPARK_MASTER_URL=spark://basic-spark-master-svc:7077 \
+    --conf spark.kubernetes.context=docker-desktop \
+    --deploy-mode cluster \
+    --conf spark.kubernetes.authenticate.driver.serviceAccountName=spark \
+    --conf spark.kubernetes.namespace=basic-spark \
+  --conf spark.executor.instances=2 \
+    local:///opt/bitnami/spark/examples/src/main/python/pi.py 10
 
+```
 
-spark-submit --master spark://basic-spark-master-0.basic-spark-headless.basic-spark.svc.cluster.local:7077 --py-files dags/repo/dags/pi.py --name arrow-spark --deploy-mode cluster examples/src/main/python/pi.py 10
+KUBECONFIG=/opt/bitnami/spark/config spark-submit \
+    --conf spark.kubernetes.container.image=milan/spark:test \
+    --master k8s://https://kubernetes.default.svc:443 \
+    --conf spark.kubernetes.driverEnv.SPARK_MASTER_URL=spark://basic-spark-master-svc:7077 \
+    --conf spark.kubernetes.context=docker-desktop \
+    --deploy-mode cluster \
+    --conf spark.kubernetes.authenticate.driver.serviceAccountName=spark \
+    --conf spark.kubernetes.authenticate.submission.caCertFile=
+    --conf spark.kubernetes.namespace=basic-spark \
+  --conf spark.executor.instances=2 \
+    local:///opt/bitnami/spark/examples/src/main/python/pi.py 10
